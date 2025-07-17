@@ -48,7 +48,7 @@
               <q-icon name="facebook" class="footer-social-icon" />
             </a>
             <a
-              href="https://www.instagram.com/uptsman7pinrang?igsh=dGhiYmxwbTc0NWdk"
+              href="https://www.instagram.com/sman7pinrang_?igsh=MWVwOWVsbXJvcGRkcA=="
               target="_blank"
               aria-label="Instagram"
             >

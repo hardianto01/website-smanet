@@ -1,336 +1,328 @@
 <template>
-  <q-page class="q-pa-md page-container">
-    <div class="text-h3 text-center q-mb-xl text-weight-bold q-mt-lg page-title">Akademik</div>
+  <q-page class="page-wrapper">
+    <div class="page-title text-center">AKADEMIK</div>
 
-    <q-intersection transition="fade-in" once class="container q-mb-xl">
-      <q-card class="section-card">
-        <q-card-section class="q-pa-lg">
-          <div class="section-title q-mb-md">
-            <div class="text-h4 text-weight-bold section-title-text">Kurikulum</div>
-          </div>
-          <p class="text-body1 text-dark-grey text-justify">{{ kurikulumText }}</p>
-        </q-card-section>
-      </q-card>
-    </q-intersection>
+    <q-card class="section-card">
+      <q-card-section class="q-pa-xl">
+        <div class="section-header">📚 Kurikulum</div>
+        <p class="akademik-text text-justify">{{ kurikulumText }}</p>
+      </q-card-section>
+    </q-card>
 
-    <q-intersection transition="fade-in" once class="container q-mb-xl">
-      <q-card class="section-card">
-        <q-card-section class="q-pa-lg">
-          <div class="section-title q-mb-md">
-            <div class="text-h4 text-weight-bold section-title-text">Program Unggulan</div>
-          </div>
-          <q-list separator>
-            <q-item
-              v-for="(program, index) in programUnggulan"
-              :key="`program-${index}`"
-              class="q-py-md"
-            >
-              <q-item-section avatar>
-                <q-icon :name="program.icon" color="primary" size="md" />
-              </q-item-section>
-              <q-item-section>
-                <q-item-label class="text-weight-bold program-title">{{
-                  program.nama
-                }}</q-item-label>
-                <q-item-label caption class="text-dark-grey akademik-text">{{
-                  program.deskripsi
-                }}</q-item-label>
-              </q-item-section>
-            </q-item>
-          </q-list>
-        </q-card-section>
-      </q-card>
-    </q-intersection>
+    <q-card class="section-card">
+      <q-card-section class="q-pa-xl">
+        <div class="section-header">🌟 Program Unggulan</div>
+        <q-list separator class="program-list">
+          <q-item
+            v-for="(program, index) in programUnggulan"
+            :key="`program-${index}`"
+            class="q-py-md"
+            transition="slide-up"
+          >
+            <q-item-section avatar>
+              <q-icon :name="program.icon" color="primary" size="md" />
+            </q-item-section>
+            <q-item-section>
+              <q-item-label class="text-weight-bold program-title">{{ program.nama }}</q-item-label>
+              <q-item-label caption class="akademik-text">
+                {{ program.deskripsi }}
+              </q-item-label>
+            </q-item-section>
+          </q-item>
+        </q-list>
+      </q-card-section>
+    </q-card>
 
-    <q-intersection transition="fade-in" once class="container q-mb-xl">
-      <q-card class="section-card">
-        <q-card-section class="q-pa-lg">
-          <div class="row q-col-gutter-lg prestasi-section-row">
-            <div class="col-12 col-md-6">
-              <div class="section-title q-mb-md">
-                <div class="text-h4 text-weight-bold section-title-text">Prestasi Akademik</div>
-              </div>
-              <q-list dense>
-                <q-item
-                  v-for="(prestasi, index) in prestasiAkademik"
-                  :key="`akademik-${index}`"
-                  class="q-py-sm"
-                >
-                  <q-item-section avatar>
-                    <q-icon name="emoji_events" color="amber-8" size="sm" />
-                  </q-item-section>
-                  <q-item-section>
-                    <q-item-label class="text-weight-bold program-title">{{
-                      prestasi.judul
-                    }}</q-item-label>
-                    <q-item-label caption class="text-dark-grey akademik-text">{{
-                      prestasi.deskripsi
-                    }}</q-item-label>
-                  </q-item-section>
-                </q-item>
-              </q-list>
+    <q-card class="section-card">
+      <q-card-section class="q-pa-xl">
+        <div class="section-header">🏆 Prestasi Siswa</div>
+        <div class="row q-col-gutter-xl q-mt-md">
+          <div class="col-12 col-md-6">
+            <div class="prestasi-subtitle text-weight-bold q-mb-md text-dark">
+              Prestasi Akademik
             </div>
-
-            <div class="col-12 col-md-6">
-              <div class="section-title q-mb-md">
-                <div class="text-h4 text-weight-bold section-title-text">Prestasi Non-Akademik</div>
-              </div>
-              <q-list dense>
-                <q-item
-                  v-for="(prestasi, index) in prestasiNonAkademik"
-                  :key="`nonakademik-${index}`"
-                  class="q-py-sm"
-                >
-                  <q-item-section avatar>
-                    <q-icon name="sports_soccer" color="green-8" size="sm" />
-                  </q-item-section>
-                  <q-item-section>
-                    <q-item-label class="text-weight-bold program-title">{{
-                      prestasi.judul
-                    }}</q-item-label>
-                    <q-item-label caption class="text-dark-grey akademik-text">{{
-                      prestasi.deskripsi
-                    }}</q-item-label>
-                  </q-item-section>
-                </q-item>
-              </q-list>
-            </div>
+            <q-list dense class="prestasi-list">
+              <q-item
+                v-for="(prestasi, index) in prestasiAkademik"
+                :key="`akademik-${index}`"
+                class="q-py-sm prestasi-item"
+                transition="slide-up"
+              >
+                <q-item-section avatar>
+                  <q-icon name="emoji_events" color="amber-8" size="sm" />
+                </q-item-section>
+                <q-item-section>
+                  <q-item-label class="text-weight-bold program-title">{{
+                    prestasi.judul
+                  }}</q-item-label>
+                  <q-item-label caption class="akademik-text">
+                    {{ prestasi.deskripsi }}
+                  </q-item-label>
+                </q-item-section>
+              </q-item>
+            </q-list>
           </div>
-        </q-card-section>
-      </q-card>
-    </q-intersection>
+
+          <div class="col-12 col-md-6">
+            <div class="prestasi-subtitle text-weight-bold q-mb-md text-dark">
+              Prestasi Non-Akademik
+            </div>
+            <q-list dense class="prestasi-list">
+              <q-item
+                v-for="(prestasi, index) in prestasiNonAkademik"
+                :key="`nonakademik-${index}`"
+                class="q-py-sm prestasi-item"
+                transition="slide-up"
+              >
+                <q-item-section avatar>
+                  <q-icon name="sports_soccer" color="green-8" size="sm" />
+                </q-item-section>
+                <q-item-section>
+                  <q-item-label class="text-weight-bold program-title">{{
+                    prestasi.judul
+                  }}</q-item-label>
+                  <q-item-label caption class="akademik-text">
+                    {{ prestasi.deskripsi }}
+                  </q-item-label>
+                </q-item-section>
+              </q-item>
+            </q-list>
+          </div>
+        </div>
+      </q-card-section>
+    </q-card>
   </q-page>
 </template>
 
-<script>
+<script setup>
 import { ref } from 'vue'
-// Import komponen Quasar yang dibutuhkan
-import {
-  QPage,
-  QList,
-  QItem,
-  QItemSection,
-  QItemLabel,
-  QIcon,
-  QIntersection,
-  QCard,
-  QCardSection,
-} from 'quasar' // Menambahkan QCard dan QCardSection
+import { QPage, QList, QItem, QItemSection, QItemLabel, QIcon, QCard, QCardSection } from 'quasar'
 
-export default {
-  name: 'AkademikPage',
-  components: {
-    QPage,
-    QList,
-    QItem,
-    QItemSection,
-    QItemLabel,
-    QIcon, // Tambahkan QIcon
-    QIntersection, // Tambahkan QIntersection
-    QCard, // Mendaftarkan QCard
-    QCardSection, // Mendaftarkan QCardSection
+const kurikulumText = ref(
+  'SMAN 7 Pinrang menerapkan Kurikulum Merdeka sebagai dasar dalam proses pembelajaran, yang memberikan keleluasaan bagi guru dan siswa untuk mengembangkan potensi sesuai minat dan bakat masing-masing. Kurikulum ini menekankan pembelajaran yang lebih bermakna, kreatif serta berpusat pada peserta didik, dengan fleksibilitas dalam memilih materi ajar dan metode pembelajaran. Selain itu, muatan lokal juga turut diintegrasikan untuk memperkuat nilai budaya dan kearifan lokal, menjadikan pembelajaran lebih kontekstual dan relevan dengan lingkungan sekitar.',
+)
+
+const programUnggulan = ref([
+  {
+    icon: 'eco',
+    nama: 'Sekolah Adiwiyata – Pendidikan Berbasis Lingkungan',
+    deskripsi:
+      'SMAN 7 Pinrang meraih penghargaan Sekolah Adiwiyata 2025 dari Kementerian Lingkungan Hidup dan Kehutanan, yang diserahkan langsung oleh Gubernur Sulawesi Selatan. Penghargaan ini diberikan atas komitmen sekolah dalam mengembangkan program-program lingkungan hidup dan pendidikan lingkungan, seperti pengelolaan sampah, penghijauan, dan integrasi pendidikan lingkungan ke dalam kegiatan belajar mengajar.',
   },
-  setup() {
-    // Data Konten Kurikulum
-    const kurikulumText =
-      'SMAN 7 Pinrang menerapkan Kurikulum Merdeka sebagai dasar dalam proses pembelajaran, yang memberikan keleluasaan bagi guru dan siswa untuk mengembangkan potensi sesuai minat dan bakat masing-masing. Kurikulum ini menekankan pembelajaran yang lebih bermakna, kreatif serta berpusat pada peserta didik, dengan fleksibilitas dalam memilih materi ajar dan metode pembelajaran. Selain itu, muatan lokal juga turut diintegrasikan untuk memperkuat nilai budaya dan kearifan lokal, menjadikan pembelajaran lebih kontekstual dan relevan dengan lingkungan sekitar.'
-
-    // Data Program Unggulan (disesuaikan dengan teks baru dan ikon)
-    const programUnggulan = [
-      {
-        icon: 'eco',
-        nama: 'Sekolah Adiwiyata – Pendidikan Berbasis Lingkungan',
-        deskripsi:
-          'SMAN 7 Pinrang meraih penghargaan Sekolah Adiwiyata 2025 dari Kementerian Lingkungan Hidup dan Kehutanan, yang diserahkan langsung oleh Gubernur Sulawesi Selatan. Penghargaan ini diberikan atas komitmen sekolah dalam mengembangkan program-program lingkungan hidup dan pendidikan lingkungan, seperti pengelolaan sampah, penghijauan, dan integrasi pendidikan lingkungan ke dalam kegiatan belajar mengajar.',
-      },
-      {
-        icon: 'groups',
-        nama: 'SC-DARE SMANET – Study Club Debate and Research',
-        deskripsi:
-          'Salah satu program unggulan akademik di SMAN 7 Pinrang adalah SC-DARE SMANET, sebuah klub debat dan riset yang telah meraih Juara 1 Lomba Debat Ilmiah tingkat SMA se-Sulawesi Selatan pada tahun 2024. Prestasi ini menunjukkan dedikasi sekolah dalam mengembangkan kemampuan berpikir kritis dan komunikasi siswa.',
-      },
-      {
-        icon: 'spellcheck',
-        nama: 'Penghargaan Wajah Bahasa Sekolah Tingkat Nasional',
-        deskripsi:
-          'Pada tahun 2021, SMAN 7 Pinrang meraih peringkat pertama dalam penghargaan Wajah Bahasa Sekolah Tingkat Nasional yang diselenggarakan oleh Badan Pengembangan dan Pembinaan Bahasa Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi. Penghargaan ini diberikan atas upaya sekolah dalam mengutamakan penggunaan bahasa Indonesia yang baik dan benar di ruang publik sekolah.',
-      },
-    ]
-
-    // Data Prestasi Akademik (disesuaikan dengan teks baru)
-    const prestasiAkademik = [
-      {
-        judul: 'Juara 1 Lomba Debat Ilmiah se-Sulawesi Selatan',
-        deskripsi:
-          'Tim Study Club Debate and Research (SC-DARE SMANET) berhasil meraih Juara 1 dalam Lomba Debat Ilmiah tingkat SMA se-Sulawesi Selatan yang diselenggarakan di Universitas Muslim Indonesia. Selain itu, salah satu anggota tim juga dinobatkan sebagai Best Speaker, dan sekolah menerima medali emas serta uang pembinaan.',
-      },
-      {
-        judul: 'Juara 1 dan 2 Lomba Debat Tingkat SMA se-Ajattapareng',
-        deskripsi:
-          'SMAN 7 Pinrang meraih Juara 1 dan 2 dalam Lomba Debat tingkat SMA se-Ajattapareng, membawa pulang medali emas dan perak, serta Piala Bergilir dan Piala Tetap.',
-      },
-      {
-        judul: 'Empat Penghargaan dalam Uji Kemahiran Bahasa Indonesia (UKBI)',
-        deskripsi:
-          'Dalam momentum Hari Pendidikan Nasional (Hardiknas) 2024, SMAN 7 Pinrang menerima empat penghargaan sekaligus dalam penilaian UKBI yang diselenggarakan oleh Badan Bahasa Kemendikbudristek.',
-      },
-    ]
-
-    // Data Prestasi Non-Akademik (disesuaikan dengan teks baru)
-    const prestasiNonAkademik = [
-      {
-        judul: 'Juara Umum Hima Fisip Competition UM Sidrap 2025',
-        deskripsi:
-          'SMAN 7 Pinrang meraih Juara Umum dalam ajang Hima Fisip Competition di Universitas Muhammadiyah Sidrap, dengan prestasi Juara 1 Voli Putri, Juara 1 E-Sport, Juara 1 Puisi, Juara 2 Nyanyi Solo, Juara 2 Tari Kreasi, Juara 3 Debat, dan Juara 3 Karya Tulis Ilmiah (KTI).',
-      },
-      {
-        judul: 'Juara 3 Kejuaraan Pencak Silat Kabupaten Pinrang 2024',
-        deskripsi:
-          'Naura Sabilillah, siswa kelas X SMAN 7 Pinrang, meraih Juara 3 pada kategori Tanding Kelas B Putri dalam Kejuaraan Pencak Silat tingkat Kabupaten Pinrang.',
-      },
-    ]
-
-    return {
-      kurikulumText,
-      programUnggulan,
-      prestasiAkademik,
-      prestasiNonAkademik,
-    }
+  {
+    icon: 'groups',
+    nama: 'SC-DARE SMANET – Study Club Debate and Research',
+    deskripsi:
+      'Salah satu program unggulan akademik di SMAN 7 Pinrang adalah SC-DARE SMANET, sebuah klub debat dan riset yang telah meraih Juara 1 Lomba Debat Ilmiah tingkat SMA se-Sulawesi Selatan pada tahun 2024. Prestasi ini menunjukkan dedikasi sekolah dalam mengembangkan kemampuan berpikir kritis dan komunikasi siswa.',
   },
-}
+  {
+    icon: 'spellcheck',
+    nama: 'Penghargaan Wajah Bahasa Sekolah Tingkat Nasional',
+    deskripsi:
+      'Pada tahun 2021, SMAN 7 Pinrang meraih peringkat pertama dalam penghargaan Wajah Bahasa Sekolah Tingkat Nasional yang diselenggarakan oleh Badan Pengembangan dan Pembinaan Bahasa Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi. Penghargaan ini diberikan atas upaya sekolah dalam mengutamakan penggunaan bahasa Indonesia yang baik dan benar di ruang publik sekolah.',
+  },
+])
+
+const prestasiAkademik = ref([
+  {
+    judul: 'Juara 1 Lomba Debat Ilmiah se-Sulawesi Selatan',
+    deskripsi:
+      'Tim Study Club Debate and Research (SC-DARE SMANET) berhasil meraih Juara 1 dalam Lomba Debat Ilmiah tingkat SMA se-Sulawesi Selatan yang diselenggarakan di Universitas Muslim Indonesia. Selain itu, salah satu anggota tim juga dinobatkan sebagai Best Speaker, dan sekolah menerima medali emas serta uang pembinaan.',
+  },
+  {
+    judul: 'Juara 1 dan 2 Lomba Debat Tingkat SMA se-Ajattapareng',
+    deskripsi:
+      'SMAN 7 Pinrang meraih Juara 1 dan 2 dalam Lomba Debat tingkat SMA se-Ajattapareng, membawa pulang medali emas dan perak, serta Piala Bergilir dan Piala Tetap.',
+  },
+  {
+    judul: 'Empat Penghargaan dalam Uji Kemahiran Bahasa Indonesia (UKBI)',
+    deskripsi:
+      'Dalam momentum Hari Pendidikan Nasional (Hardiknas) 2024, SMAN 7 Pinrang menerima empat penghargaan sekaligus dalam penilaian UKBI yang diselenggarakan oleh Badan Bahasa Kemendikbudristek.',
+  },
+])
+
+const prestasiNonAkademik = ref([
+  {
+    judul: 'Juara Umum Hima Fisip Competition UM Sidrap 2025',
+    deskripsi:
+      'SMAN 7 Pinrang meraih Juara Umum dalam ajang Hima Fisip Competition di Universitas Muhammadiyah Sidrap, dengan prestasi Juara 1 Voli Putri, Juara 1 E-Sport, Juara 1 Puisi, Juara 2 Nyanyi Solo, Juara 2 Tari Kreasi, Juara 3 Debat, dan Juara 3 Karya Tulis Ilmiah (KTI).',
+  },
+  {
+    judul: 'Juara 3 Kejuaraan Pencak Silat Kabupaten Pinrang 2024',
+    deskripsi:
+      'Naura Sabilillah, siswa kelas X SMAN 7 Pinrang, meraih Juara 3 pada kategori Tanding Kelas B Putri dalam Kejuaraan Pencak Silat tingkat Kabupaten Pinrang.',
+  },
+])
 </script>
 
 <style scoped>
-/* Mengimpor font Inter jika belum diimpor secara global */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-
-/* Menerapkan font Inter ke seluruh elemen di halaman ini */
-.page-container {
-  font-family: 'Inter', sans-serif;
+.page-wrapper {
+  min-height: 100vh;
+  width: 100%;
+  padding: 64px 32px 96px 32px;
+  background: linear-gradient(120deg, #e3f2fd, #f0f4ff);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  scroll-padding-top: 80px;
 }
 
-.container {
-  max-width: 1200px; /* Batasi lebar konten utama */
-  margin: 0 auto; /* Pusatkan kontainer */
-  padding: 0 15px; /* Tambahkan padding horizontal */
-}
-
-/* Gaya baru untuk judul halaman utama (sama dengan Profil) */
 .page-title {
-  color: #000; /* Warna hitam pekat */
-  margin-top: 2rem; /* Menambahkan margin atas */
-  margin-bottom: 2rem; /* Menambahkan margin bawah */
-  /* Hapus properti gradient jika tidak diinginkan */
-  /* background: none; */
-  /* -webkit-background-clip: unset; */
-  /* -webkit-text-fill-color: unset; */
-  /* background-clip: unset; */
-  /* text-fill-color: unset; */
-}
-
-/* Gaya card untuk setiap bagian (sama dengan Profil) */
-.section-card {
-  border-radius: 12px; /* Sudut membulat pada card bagian */
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08); /* Bayangan pada card */
-  background-color: #ffffff; /* Latar belakang putih untuk card */
-  margin-bottom: 2rem; /* Menambahkan margin bawah pada setiap card bagian */
-}
-
-/* Menghapus margin-bottom bawaan dari q-mb-xl pada container karena sudah ada margin di section-card */
-.container.q-mb-xl {
-  margin-bottom: 0 !important;
-}
-
-/* Gaya untuk judul bagian (sama dengan Profil) */
-.section-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #0d47a1;
+  text-align: center;
+  margin-bottom: 48px;
+  text-shadow: 0 3px 5px rgba(13, 71, 161, 0.2);
+  letter-spacing: 0.8px;
   position: relative;
-  padding-bottom: 10px; /* Jarak antara teks judul dan garis */
-  margin-bottom: 20px; /* Jarak antara judul section dan konten di bawahnya */
 }
 
-/* Warna teks untuk judul bagian (sama dengan Profil) */
-.section-title-text {
-  color: #333; /* Mengubah warna judul bagian menjadi abu-abu gelap */
+.section-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 24px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e0e6f0;
+  width: 100%;
+  margin-bottom: 40px;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+.section-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.08);
 }
 
-/* Gaya garis bawah pada judul bagian (sama dengan Profil) */
-.section-title::after {
+.section-header {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #1565c0;
+  margin-bottom: 20px;
+  padding-left: 18px;
+  position: relative;
+}
+.section-header::before {
   content: '';
   position: absolute;
-  left: 0; /* Garis mulai dari kiri */
-  bottom: 0; /* Garis di bagian bawah */
-  width: 80px; /* Lebar garis (sesuaikan jika perlu) */
-  height: 3px; /* Ketebalan garis */
-  background-color: var(--q-color-primary); /* Warna garis (biru SMANET) */
-  border-radius: 2px; /* Sudut membulat pada garis */
+  width: 6px;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background: #2196f3;
+  border-radius: 4px;
 }
 
-/* Mengatur ulang posisi garis untuk judul yang di tengah (jika ada) */
-.section-title.text-center::after {
-  left: 50%; /* Mulai dari tengah */
-  transform: translateX(-50%); /* Geser ke kiri setengah dari lebarnya agar benar-benar di tengah */
+.text-dark {
+  color: #2a2a2a;
 }
 
-/* Gaya untuk teks isi (paragraf, deskripsi program, deskripsi prestasi) */
-/* Menggunakan class custom untuk kontrol lebih baik, warna teks lebih gelap */
 .akademik-text {
-  line-height: 1.7; /* Meningkatkan line-height sedikit */
-  font-size: 1.05rem; /* Sedikit lebih besar dari ukuran standar text-body1 */
-  color: #444; /* Menggunakan warna abu-abu gelap */
+  line-height: 1.7 !important;
+  font-size: 1rem !important;
+  color: #3a3a3a !important;
+  font-weight: normal !important;
+  text-transform: none !important;
+  letter-spacing: normal !important;
 }
 
-/* Gaya spesifik untuk judul item Program Unggulan dan Prestasi */
+.prestasi-subtitle {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 16px;
+}
+
+.program-list .q-item {
+  border-bottom: 1px solid #f0f0f0;
+  transition: background 0.3s ease;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+}
+.program-list .q-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+.program-list .q-item:hover {
+  background-color: #e8f0fe;
+}
+
+.prestasi-list .q-item {
+  border-bottom: 1px solid #f0f0f0;
+  transition: background 0.3s ease;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+}
+.prestasi-list .q-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+.prestasi-list .q-item:hover {
+  background-color: #e8f0fe;
+}
+
 .program-title {
-  font-size: 1.1rem !important; /* Ukuran font judul item, pastikan lebih besar dari deskripsi */
-  line-height: 1.5 !important; /* Line-height untuk judul item */
-  font-weight: bold !important; /* Memastikan judul item tebal */
-  color: #000 !important; /* Memastikan warna judul item hitam */
+  font-size: 1.05rem !important;
+  font-weight: 700;
+  color: #0a1f44;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
 }
 
-/* Gaya untuk row yang membungkus 2 kolom prestasi (sama dengan Profil) */
-.prestasi-section-row {
-  margin-top: 0; /* Menghilangkan margin atas default row jika ada */
+.q-icon {
+  background: #e3f2fd;
+  border-radius: 50%;
+  padding: 6px;
 }
 
-/* Gaya responsif */
+.q-card-section {
+  position: relative;
+}
+.q-card-section > * {
+  position: relative;
+  z-index: 1;
+}
+
 @media (max-width: 768px) {
-  .text-h3 {
-    font-size: 2rem;
-  } /* Kurangi ukuran judul h3 di mobile */
-  .text-h4 {
+  .page-title {
     font-size: 1.8rem;
-  } /* Kurangi ukuran judul h4 di mobile */
-  .text-h6 {
-    font-size: 1rem;
-  } /* Kurangi ukuran judul h6 di mobile */
-  .q-pa-md {
-    padding: 16px !important;
-  } /* Sesuaikan padding halaman di mobile */
-
-  /* Sesuaikan lebar garis di mobile jika perlu */
-  .section-title::after {
-    width: 60px; /* Lebar garis di mobile */
+    margin-bottom: 30px;
   }
-
-  /* Sesuaikan ukuran font dan line-height di mobile */
-  .akademik-text {
-    font-size: 0.95rem; /* Sedikit lebih kecil di mobile */
-    line-height: 1.5; /* Line-height di mobile */
+  .section-header {
+    font-size: 1.2rem;
+    margin-bottom: 16px;
   }
-
   .program-title {
-    font-size: 1rem !important; /* Ukuran font judul item di mobile */
-    line-height: 1.4 !important; /* Line-height untuk judul item di mobile */
+    font-size: 0.95rem !important;
+  }
+  .akademik-text {
+    font-size: 0.9rem !important;
+    line-height: 1.6 !important;
+    letter-spacing: normal !important;
+  }
+  .prestasi-subtitle {
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+  }
+  .program-list .q-item,
+  .prestasi-list .q-item {
+    margin-bottom: 8px;
+    padding-bottom: 8px;
   }
 
-  /* Mengatur ulang jarak antar kolom prestasi di mobile (sama dengan Profil) */
-  .prestasi-section-row > .col-12 {
-    padding-top: 16px !important; /* Sesuaikan padding atas antar kolom yang menumpuk */
-    padding-left: 16px !important; /* Sesuaikan padding kiri */
+  .page-wrapper {
+    padding: 40px 16px 60px 16px;
   }
-  .prestasi-section-row {
-    margin-top: -16px !important;
+  .row.q-col-gutter-xl {
     margin-left: -16px !important;
+    margin-top: -16px !important;
+  }
+  .row.q-col-gutter-xl > div {
+    padding-left: 16px !important;
+    padding-top: 16px !important;
   }
 }
 </style>

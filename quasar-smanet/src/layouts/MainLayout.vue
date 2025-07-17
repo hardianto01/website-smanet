@@ -10,7 +10,7 @@
     </div>
 
     <q-page-container :style="pageContainerPaddingStyle">
-      <router-view />
+      <router-view :key="$route.fullPath" />
     </q-page-container>
 
     <FooterSection />
@@ -80,3 +80,22 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+/* Gaya yang spesifik untuk MainLayout */
+
+.navbar-sticky-js {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 999;
+  background-color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.q-page-container {
+  background-color: #f7f7f7; /* Gaya background spesifik untuk page container di layout ini */
+}
+</style>

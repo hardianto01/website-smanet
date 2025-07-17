@@ -1,6 +1,8 @@
 // backend/src/models/announcementModel.js
 const db = require('../config/db');
-// Hapus import slugify jika ada (di kode Anda tidak ada)
+const path = require('path'); // Pastikan path diimport jika digunakan di sini, meskipun kelihatannya hanya di controller
+
+// Hapus import slugify jika ada
 // const slugify = require('slugify');
 
 // Fungsi untuk mengambil SEMUA pengumuman (untuk admin)
@@ -94,18 +96,17 @@ const createAnnouncement = async (announcementData) => {
 const updateAnnouncement = async (id, announcementData) => {
     console.log(`AnnouncementModel: Updating announcement item with ID ${id}.`, announcementData);
     try {
-        // Hapus logika pembuatan/update slug
+        // Hapus logika pembuatan/update slug (sudah dikomentari)
         // let slug = announcementData.slug;
         // if (!slug && announcementData.title) {
         //      slug = announcementData.title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
         // }
 
-        // Hapus kolom slug dan placeholder (?) dari query UPDATE
-        const query = `
-            UPDATE announcements
-            SET title = ?, content = ?, image_url = ?, status = ?, published_at = ?, updated_at = CURRENT_TIMESTAMP
-            WHERE id = ?
-        `; // Hapus slug = ?
+        // --- PERBAIKI STRING QUERY UPDATE DI SINI ---
+        // Hapus whitespace dan newline di awal dan akhir template literal
+        const query = `UPDATE announcements SET title = ?, content = ?, image_url = ?, status = ?, published_at = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?`;
+        // --- AKHIR PERBAIKAN STRING QUERY ---
+
          const values = [
             announcementData.title,
             // Hapus nilai slug
@@ -113,15 +114,24 @@ const updateAnnouncement = async (id, announcementData) => {
             announcementData.content,
             announcementData.image_url,
             announcementData.status,
-            announcementData.published_at,
+            announcementData.published_at, // Ini nilai yang perlu kita perhatikan
             id,
         ];
+
+        // --- TAMBAHKAN LOGGING INI (Sudah ada, biarkan) ---
+        console.log('AnnouncementModel: Executing UPDATE query with values:', values);
+        console.log('AnnouncementModel: Query:', query);
+        // --- AKHIR LOGGING ---
+
+
         const [result] = await db.execute(query, values);
         console.log('AnnouncementModel: Announcement item updated.', result);
         return { affectedRows: result.affectedRows };
     } catch (error) {
         console.error(`AnnouncementModel: Error updating announcement item with ID ${id}:`, error);
-        throw error;
+        // Log nilai yang digunakan saat error terjadi (Sudah ada, biarkan)
+        console.error('AnnouncementModel: Values used in failed UPDATE query:', values);
+        throw error; // Lempar kembali error agar ditangkap di controller
     }
 };
 
@@ -138,13 +148,13 @@ const deleteAnnouncement = async (id) => {
     }
 };
 
+// --- PASTIKAN SEMUA FUNGSI YANG DIBUTUHKAN DIEKSPOR DI SINI ---
 module.exports = {
     getAllAnnouncements,
     getAnnouncementById,
-    getPublishedAnnouncementById, // <-- Jika ini tetap diperlukan untuk cari publik by ID
+    getPublishedAnnouncementById,
     getAllPublishedAnnouncements,
     createAnnouncement,
-    updateAnnouncement,
+    updateAnnouncement, // <-- Ekspor fungsi ini
     deleteAnnouncement,
-    // Pastikan hanya fungsi yang relevan diekspor setelah menghapus slug
 };
